@@ -27,33 +27,74 @@ Agent* genesis(int population, int width, int height) {
     return agents;
 }
 
-/*
-void startInfect(Agent* agents,Agent** infected_agents, int pt_zero){
-    // TODO: mark pt_zero agents as infected
+
+void startInfect(Agent* agents, int pt_zero){
+		for(int i = 0; i<pt_zero; i++){
+			agents[i].status = 1;
+		}
 }
-*/
+
 
 int checkDistance(Agent* agent1, Agent* agent2){
+	fprintf(stderr,"infecte agent status %d\n" , agent1->status);
+	fprintf(stderr,"non infected agent status %d\n" , agent2->status);
     int dx = agent1->x - agent2->x;
     int dy = agent1->y - agent2->y;
     return sqrt(dx * dx + dy * dy);
 }
+int makeInfected(Agent** exposed, int exposed_count){
+	int count = 0; 
+    for(int i = 0; i< exposed_count; i++){
+      if (exposed[i]->status == 0){
+	  		if(rand() % 20 >exposed[i]->resistance){
+				exposed[i]->status = 1;
+				count++;
+			}
+			else{
+				exposed[i]->resistance++; 
+			}
+     }
+	 }
+	 return count;
+}
 
-
-Agent** findExposureGroup(Agent** infected_agents, Agent** all_agents, int population, int length){
+int findExposedGroup(Agent** infected_agents, Agent* all_agents, int population, int sickness){
+	fprintf(stderr, "here");
 	Agent** exposed_agents = malloc(population * sizeof(Agent*));
 	int exposed_count = 0;
-	for (int i=0; i < length; i++){
+	for (int i=0; i < sickness; i++){
+		fprintf(stderr,"stderrmessage: posedgroup sick count %d\n", i);
 		for (int j=0; j<population; j++){
-			int dist = checkDistance(infected_agents[i],all_agents[j]);
-			if (dist<5  && all_agents[j]->status == 0){
+		fprintf(stderr,"non infected status%d\n", all_agents[i].status);
+		fprintf(stderr,"infected status%d\n", infected_agents[i]->status);
+		fprintf(stderr,"non infected status%d\n", all_agents[i].status);
+			int dist = checkDistance(infected_agents[i],&all_agents[j]);
+			if (dist<5  && all_agents[j].status == 0){
 				// add to exposed group
-				exposed_agents[exposed_count] = all_agents[j];
+				exposed_agents[exposed_count] = &all_agents[j];
 				exposed_count++;
 			}
 		}
 	}
-	return exposed_agents;
+	//puts actual number of exposed in. 
+	exposed_count = makeInfected(exposed_agents,exposed_count); 
+	return exposed_count + sickness;
+}
+
+
+Agent** getSickies(Agent** exposed_agents, Agent* agents, int pop, int infected_count){
+	int count = 0;
+	//Agent** exposed_agents = malloc(infected_count * sizeof(Agent*));
+
+	for(int i = 0; i<pop && count<=infected_count; i++){
+		if(agents[i].status == 1){
+			exposed_agents[count] = &agents[i];
+			count++;
+
+			}
+	}
+	return exposed_agents; 
+
 }
 
 // given list of agents that are in exposure range (pointer to list of pointers to agents) and length of that list, expose agent if they aren't sick
@@ -69,6 +110,4 @@ int groupExposure(Agent** exposed_group, int length){
         }
         return infected;
 }
-
-
 
