@@ -10,7 +10,7 @@ int get_y(Agent *agent){
 }
 
 void move(Agent *agent){
-    // TODO: your movement logic
+    // TODO: kylie movement logic
 }
 
 int expose(Agent *agent){
@@ -21,7 +21,7 @@ int expose(Agent *agent){
     if (ranged_random > agent->resistance){
         agent->status = 1;
         agent->days_infected = 1;
-    } else {
+   } else {
         agent->resistance++;
     }
     return agent->status;
