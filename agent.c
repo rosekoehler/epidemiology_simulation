@@ -13,7 +13,7 @@ void move(Agent *agent){
     // TODO: kylie movement logic
 }
 
-int expose(Agent *agent){
+int exposeAgent(Agent *agent){
     int min = 1;
     int max = 10;
     int ranged_random = (rand() % (max - min + 1)) + min;
@@ -26,3 +26,4 @@ int expose(Agent *agent){
     }
     return agent->status;
 }
+
