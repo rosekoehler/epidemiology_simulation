@@ -22,14 +22,14 @@ int main(int argc, char *argv[]) {
     
 
     // Game loop
-    for (int day = 0; day <= TIME; day++) {
+    for (int day = 0; day < TIME; day++) {
         // Every day each agent moves
 	for (int pt = 0: pt <= POPULATION; pt++){
 		move_agents(all_agents[pt]);
 	}
 	// update if the close agents get infected
 	updateInfect(infected_agents, num_close);
-
+	updateDaysInfected(infected_agents);
         free(close_agents);
     }
 
