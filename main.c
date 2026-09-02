@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include "agent.h"
 #include "world.h"
-
+void printlist(Agent *agent, int pop){
+	for(int i = 0; i< pop; i++){
+		printf("Agent %d status: %d\n", i, agent[i].status);
+	}
+}
 int main(int argc, char *argv[]) {
     printf("Program name: %s\n", argv[0]);
 
@@ -18,8 +22,11 @@ int main(int argc, char *argv[]) {
 	int HEIGHT = 100;
 	int  WIDTH = 100;
     // Build all agents
-    //Agent *all_agents = genesis(POPULATION);
-	Agent ag = {43,43, 0, 0, 12};
+    Agent *all_agents = genesis(POPULATION, WIDTH, HEIGHT);
+
+//	printlist(all_agents, POPULATION);	
+
+/*
     Agent **infected_agents = malloc(POPULATION * sizeof(Agent *));
    // int infected_count = startInfect(infected_agents,all_agents,PT_ZEROS);
     
@@ -27,18 +34,18 @@ int main(int argc, char *argv[]) {
     // Game loop
     for (int day = 0; day < TIME; day++) {
 		// move everybody
-		move_agents(all_agents,POPULATION, WIDTH, HEIGHT);
+		move_agent(all_agents,POPULATION, WIDTH, HEIGHT);
 		// calculate distance between sick and not sick, see who is getting exposed
 		int exposed_count = 0;
-		Agent** exposed_agents = findExposedGroup(infected_agents,all_agents, population, infected_count, exposed_count);
+		Agent** exposed_agents = findExposedGroup(infected_agents,all_agents, POPULATION, infected_count, exposed_count);
 		// of the exposed group, update who gets sick
 		int new_infected = groupExposure(exposed_agents,exposed_count);
-       	infected_count += new_infected
+       	infected_count += new_infected;
 		printf("Day %d: Total infected: %d", day, infected_count);
     }
 
     // TODO:  write output data here
-
+*/
     free(all_agents);
     return 0;
 }

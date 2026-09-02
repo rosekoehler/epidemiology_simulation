@@ -4,7 +4,7 @@
 #include "agent.h"
 
 // creates all agents in world
-Agent* genesis(int population);
+Agent* genesis(int population, int width, int height);
 
 // takes in the array list of agents and the amount of starting infected agents
 // returns pointer to list of infected agents
