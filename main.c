@@ -15,24 +15,26 @@ int main(int argc, char *argv[]) {
     int POPULATION = atoi(argv[1]);
     int PT_ZEROS   = atoi(argv[2]);
     int TIME       = atoi(argv[3]);
-
+	int HEIGHT = 100;
+	int  WIDTH = 100;
     // Build all agents
-    struct Agent *all_agents = genesis(POPULATION);
+    //Agent *all_agents = genesis(POPULATION);
+	Agent ag = {43,43, 0, 0, 12};
     Agent **infected_agents = malloc(POPULATION * sizeof(Agent *));
-    int infected_count = startInfect(infected_agents,all_agents,PT_ZEROS);
+   // int infected_count = startInfect(infected_agents,all_agents,PT_ZEROS);
     
 
     // Game loop
     for (int day = 0; day < TIME; day++) {
-	// move everybody
-	move_agents(all_agents,POPULATION, WIDTH, HEIGHT);
-	// calculate distance between sick and not sick, see who is getting exposed
-	int exposed_count = 0;
-	Agent** exposed_agents = findExposedGroup(infected_agents,all_agents, population, infected_count, exposed_count);
-	// of the exposed group, update who gets sick
-	int new_infected = groupExposure(exposed_agents,exposed_count);
+		// move everybody
+		move_agents(all_agents,POPULATION, WIDTH, HEIGHT);
+		// calculate distance between sick and not sick, see who is getting exposed
+		int exposed_count = 0;
+		Agent** exposed_agents = findExposedGroup(infected_agents,all_agents, population, infected_count, exposed_count);
+		// of the exposed group, update who gets sick
+		int new_infected = groupExposure(exposed_agents,exposed_count);
        	infected_count += new_infected
-	printf("Day %d: Total infected: %d", day, infected_count)
+		printf("Day %d: Total infected: %d", day, infected_count);
     }
 
     // TODO:  write output data here

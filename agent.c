@@ -9,7 +9,7 @@ int get_y(Agent *agent){
     return agent->y;
 }
 
-void move(Agent *agent[], int pop, int width, int height){
+void move_agent(Agent *agent, int pop, int width, int height){
 	int maxmove = 20; 	
 
 	for(int i = 0; i < pop; i++){
