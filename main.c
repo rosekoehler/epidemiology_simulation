@@ -19,32 +19,20 @@ int main(int argc, char *argv[]) {
     // Build all agents
     struct Agent *all_agents = genesis(POPULATION);
     Agent **infected_agents = malloc(POPULATION * sizeof(Agent *));
-    int infected_count = startInfect(all_agents,PT_ZEROS);
+    int infected_count = startInfect(infected_agents,all_agents,PT_ZEROS);
     
 
     // Game loop
     for (int day = 0; day < TIME; day++) {
-        // Every day each agent:
-	// 	moves
-	// 	days_infected increased by one
-	// 	If close to other infected, exposed()
-	
-	// move all agents first, update days_infected
-	for (int pt = 0: pt < POPULATION; pt++){	
-		move_agents(all_agents[pt]);
-		// if sick increase their days_infected and update their status
-		if (all_agents[pt]->days_infected > 0){
-			// Check if at end of sickness (more than 3 days)
-			if (all_agents[pt]->days_infected > 2){
-				
-	}
-	// TODO: How to find out when agents are in exposure distance?
+	// move everybody
+	move_agents(all_agents,POPULATION, WIDTH, HEIGHT);
+	// calculate distance between sick and not sick, see who is getting exposed
 	int exposed_count = 0;
-	Agent** exposed_agents = findExposedGroup(infected_agents,all_agents, population, infected_count, exposed_count)
-	// Once find this out ^ list of all agents within exposure
-	groupExposure(exposed_agents,exposed_count);
-	updateDaysInfected(infected_agents);
-       	printf("Day %d: Total infected: %d", day, infected_count)
+	Agent** exposed_agents = findExposedGroup(infected_agents,all_agents, population, infected_count, exposed_count);
+	// of the exposed group, update who gets sick
+	int new_infected = groupExposure(exposed_agents,exposed_count);
+       	infected_count += new_infected
+	printf("Day %d: Total infected: %d", day, infected_count)
     }
 
     // TODO:  write output data here

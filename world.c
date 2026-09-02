@@ -12,9 +12,6 @@ void Agent* startInfect(Agent* agents, int pt_zero){
     // TODO: mark pt_zero agents as infected, return pointer to infected list
 }
 
-void updateDaysInfected(Agent* agent){
-    agent->days_infected++;
-}
 
 int checkDistance(Agent* agent1, Agent* agent2){
     int dx = agent1->x - agent2->x;
