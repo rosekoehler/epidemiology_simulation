@@ -16,6 +16,12 @@ void updateDaysInfected(Agent* agent){
     agent->days_infected++;
 }
 
+int checkDistance(Agent* agent1, Agent* agent2){
+    int dx = agent1->x - agent2->x;
+    int dy = agent1->y - agent2->y;
+    return sqrt(dx * dx + dy * dy);
+}
+
 // given list of agents that are in exposure range (pointer to list of pointers to agents) and length of that list, expose agent if they aren't sick
 // returns number of agents infected
 int groupExposure(Agent** exposed_group, int length){
@@ -29,3 +35,24 @@ int groupExposure(Agent** exposed_group, int length){
 	}
 	return infected;
 }
+
+Agent** findExposureGroup(Agent** infected_agents, Agent** all_agents, int population, int length){
+	Agent** exposed_agents = malloc(population * sizeof(Agent*));
+	int exposed_count = 0;
+	for (int i=0; i < length; i++){
+		for (int j=0; j<population; j++){
+			int dist = checkDistance(infected_agents[i],all_agents[j]);
+			if (dist>5  && all_agents[j].status == 0){
+				// add to exposed group
+				exposed_agents[exposed_count] = &all_agents[j];
+				exposed_count++;
+			}
+		}
+	}
+	return exposed_agent;
+}
+
+
+
+
+

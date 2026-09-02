@@ -39,9 +39,10 @@ int main(int argc, char *argv[]) {
 				
 	}
 	// TODO: How to find out when agents are in exposure distance?
-	findExposedGroup(infected_agents, infected_count)
+	int exposed_count = 0;
+	Agent** exposed_agents = findExposedGroup(infected_agents,all_agents, population, infected_count, exposed_count)
 	// Once find this out ^ list of all agents within exposure
-	groupExposure(agents_in_range);
+	groupExposure(exposed_agents,exposed_count);
 	updateDaysInfected(infected_agents);
        	printf("Day %d: Total infected: %d", day, infected_count)
     }
