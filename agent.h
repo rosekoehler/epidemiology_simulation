@@ -8,6 +8,7 @@ typedef struct Agent{
     int status;
     int days_infected;
     int resistance;
+	int willbeinfect;
 } Agent;
 
 int get_x(Agent *agent);
