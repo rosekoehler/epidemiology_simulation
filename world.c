@@ -34,14 +34,12 @@ void startInfect(Agent* agents, int pt_zero){
 	}
 }
 
-
 int checkDistance(Agent* agent1, Agent* agent2){
-	//fprintf(stderr,"infected agent status %d\n" , agent1->status);
-	//fprintf(stderr,"non infected agent status %d\n" , agent2->status);
     int dx = agent1->x - agent2->x;
     int dy = agent1->y - agent2->y;
     return sqrt(dx * dx + dy * dy);
 }
+
 int makeInfected(Agent** exposed, int exposed_count){
     int count = 0; 
     for(int i = 0; i< exposed_count; i++){
@@ -54,22 +52,16 @@ int makeInfected(Agent** exposed, int exposed_count){
 		}
      	}
     }
-    printf("count: %d\n", count);	
+    printf("MakeInfected(): of %d exposed agents, %d were infected\n",exposed_count,count);	
     return count;
 }
 
 int findExposedGroup(Agent** infected_agents, Agent* all_agents, int population, int sickness){
-	fprintf(stderr, "entering findExposedGroup()");
 	Agent** exposed_agents = malloc(population * sizeof(Agent*));
 	int exposed_count = 0;
 	for (int i=0; i < sickness; i++){
-		fprintf(stderr,"stderrmessage: posedgroup sick count %d\n", i);
 		for (int j=0; j<population; j++){
-		//fprintf(stderr,"non infected status%d\n", all_agents[i].status);
-		//fprintf(stderr,"infected status%d\n", infected_agents[i]->status);
-		//fprintf(stderr,"non infected status%d\n", all_agents[i].status);
 			int dist = checkDistance(infected_agents[i],&all_agents[j]);
-			printf("distance: %d\n", dist);
 			if (dist != 0 && dist < 30  && all_agents[j].status == 0){
 				// add to exposed group
 				exposed_agents[exposed_count] = &all_agents[j];
