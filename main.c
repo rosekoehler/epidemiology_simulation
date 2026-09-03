@@ -32,16 +32,21 @@ int main(int argc, char *argv[]) {
     for (int day = 1; day <= TIME; day++) {
 		// move everybody
 		move_agent(all_agents,POPULATION, WIDTH, HEIGHT);
-		// calculate distance between sick and not sick, see who is getting exposed
-		Agent** exposed_agents = malloc(infected_count * sizeof(Agent*));
-		infected_agents = getSickies(exposed_agents, all_agents, POPULATION, infected_count);	
+		// figure out who is currently sick
+		infected_agents = getSickies(all_agents, POPULATION, infected_count);	
+		// findExposedGroup()
+		// 	loop through the currently infected agents and see who they are close to
+		//	try to infect agents if they are close to the sickies
 		infected_count = findExposedGroup(infected_agents,all_agents, POPULATION,infected_count);
-		// of the exposed group, update who gets sick
 		printf("Day %d: Total infected: %d\n", day, infected_count);
+    //		free(infected_agents);
     }
 	
     // TODO:  write output data here
-    printf("Done\n");
+    printf("\n#############	STATS	############\n\n");
+    printf("Population: %d\n", POPULATION);
+    printf("Starting infected population: %d\n", PT_ZEROS);
+    printf("After %d days, %d people out of %d are now infected\n\n",TIME,infected_count,POPULATION);
     free(all_agents);
     return 0;
 }

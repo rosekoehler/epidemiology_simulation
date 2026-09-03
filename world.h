@@ -12,9 +12,8 @@ void startInfect(Agent* agents, int pt_zero);
 
 // increments days_infected for a single infected agent
 void updateDaysInfected(Agent* agent);
-int groupExposure(Agent** exposed_group, int length);
 int  findExposedGroup(Agent** infected_agents, Agent* all_agents, int population, int sickness);
 
-Agent** getSickies(Agent** exposed_agents, Agent* agents, int pop, int infected_count); 
+Agent** getSickies(Agent* agents, int pop, int infected_count); 
 
 #endif

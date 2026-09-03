@@ -13,8 +13,4 @@ typedef struct Agent{
 int get_x(Agent *agent);
 int get_y(Agent *agent);
 int move_agent(Agent *agent, int pop, int width, int height);
-
-// returns status, run when within exposure distance of another agent.
-int expose(Agent *agent);
-
 #endif

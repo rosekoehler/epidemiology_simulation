@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "agent.h"
-
 int get_x(Agent *agent){
     return agent->x;
 }
@@ -43,18 +42,4 @@ int  move_agent(Agent *agent, int pop, int width, int height){
 	}
 	return 0; 	
 }
-
-//int exposeAgent(Agent *agent){
-//    int min = 1;
-//    int max = 10;
-//    int ranged_random = (rand() % (max - min + 1)) + min;
-//
-//    if (ranged_random > agent->resistance){
-//        agent->status = 1;
-//        agent->days_infected = 1;
-//   } else {
-//        agent->resistance++;
-//    }
-//    return agent->status;
-//}
 
