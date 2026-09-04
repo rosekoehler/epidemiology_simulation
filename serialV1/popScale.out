@@ -1,0 +1,42 @@
+Starting profile for serial implementation
+test 100000
+Program name: ../main
+After 5 days, 25484 people out of 100000 are now infected
+
+
+real	0m35.121s
+user	0m35.110s
+sys	0m0.004s
+test 150000
+Program name: ../main
+After 5 days, 41416 people out of 150000 are now infected
+
+
+real	1m25.215s
+user	1m25.201s
+sys	0m0.000s
+test 200000
+Program name: ../main
+After 5 days, 58107 people out of 200000 are now infected
+
+
+real	2m42.118s
+user	2m42.094s
+sys	0m0.000s
+test 250000
+Program name: ../main
+After 5 days, 73130 people out of 250000 are now infected
+
+
+real	4m17.166s
+user	4m17.128s
+sys	0m0.004s
+test 300000
+Program name: ../main
+After 5 days, 90232 people out of 300000 are now infected
+
+
+real	6m19.566s
+user	6m19.519s
+sys	0m0.000s
+Finished serialV1 test
